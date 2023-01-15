@@ -94,10 +94,34 @@ const createBubbleChart = (data) => {
     .join("li")
     .attr("class", "bubble-color-legend-item");
 
-  listItems.append("span").attr("class", "legend-circle").style('background-color', d => colorScale(d.artist));
+  listItems
+    .append("span")
+    .attr("class", "legend-circle")
+    .style("background-color", (d) => colorScale(d.artist));
 
   listItems
     .append("span")
     .attr("class", "legend-label")
     .text((d) => d.title + ", " + d.artist);
+
+  const salesLegend = d3
+    .select(".legend-area")
+    .append("svg")
+    .attr("viewbox", [0, 0, 150, 100])
+    .attr("width", 150)
+    .attr("height", 100);
+
+  const circlesGroup = salesLegend
+    .append("g")
+    .attr("class", "circles-group")
+    .attr("fill", "#727a87")
+    .attr("fill-opacity", 0.4);
+  const linesGroup = salesLegend.append("g").attr("class", "lines-group");
+  const lablesGroup = salesLegend.append("g").attr("class", "labels-group");
+
+  circlesGroup.append("circle").attr("cx", 50).attr("cy", 32).attr("r", 27);
+  circlesGroup.append("circle").attr("cx", 50).attr("cy", 44).attr("r", 15);
+  circlesGroup.append("circle").attr("cx", 50).attr("cy", 50).attr("r", 6);
+
+  
 };
