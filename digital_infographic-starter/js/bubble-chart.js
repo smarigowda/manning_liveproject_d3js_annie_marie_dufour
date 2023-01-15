@@ -58,7 +58,7 @@ const createBubbleChart = (data) => {
     .attr("x", width - margin.right)
     .attr("y", height - margin.bottom + 50)
     .attr("text-anchor", "end")
-    .attr('font-weight', 700)
+    .attr("font-weight", 700);
 
   bubbleChart
     .append("text")
@@ -66,4 +66,23 @@ const createBubbleChart = (data) => {
     .attr("x", margin.left - 25)
     .attr("y", margin.top - 20)
     .attr("font-weight", 700);
+
+  const bubblesAreaScale = d3
+    .scaleSqrt()
+    .domain([0, d3.max(data, (d) => d.album_sales_millions)])
+    .range([2, 40]);
+
+  const colorScale = d3
+    .scaleOrdinal()
+    .domain(artists)
+    .range(d3.schemeTableau10);
+
+  bubbleChart
+    .selectAll("circle")
+    .data(data)
+    .join("circle")
+    .attr("cx", (d) => audioStreamsScale(d.on_demand_audio_streams_millions))
+    .attr("cy", (d) => videoStreamScale(d.on_demand_video_streams_millions))
+    .attr("r", (d) => bubblesAreaScale(d.album_sales_millions))
+    .attr('fill', d => colorScale(d.artist))
 };
