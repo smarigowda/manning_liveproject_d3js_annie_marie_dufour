@@ -12,6 +12,7 @@ topAlbumsSection.append("h3").text("Top Rock Albums");
 
 const barChartWidth = 500;
 const barChartHeight = 130;
+
 const barChart = topAlbumsSection
   .append("svg")
   .attr("viewbox", [0, 0, barChartWidth, barChartHeight])
@@ -25,5 +26,12 @@ barChart
   .attr("y1", 0)
   .attr("x2", marginLeft)
   .attr("y2", barChartHeight)
-  .attr('stroke', "#333")
-  .attr("stroke-width", 2)
+  .attr("stroke", "#333")
+  .attr("stroke-width", 2);
+
+const barLengthScale = d3
+  .scaleLinear()
+  .domain([0, 1000000])
+  .range(0, barChartHeight - marginLeft - 100);
+
+
