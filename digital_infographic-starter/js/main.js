@@ -46,3 +46,12 @@ barChart
   .attr("x", marginLeft + 1)
   .attr("y", (d, i) => barSpacing + (barHeight + barSpacing) * i)
   .attr("fill", "#a6d854");
+
+barChart
+  .selectAll(".label-value")
+  .data(topRockAlbums)
+  .join("text")
+  .text((d) => d.eq_albums/ 1000000 + ' M')
+  .attr("x", (d) => marginLeft + barLengthScale(d.eq_albums) + 10)
+  .attr("y", (d, i) => barSpacing + (barSpacing + barHeight) * i + 14)
+  .attr('class', 'label label-value')
