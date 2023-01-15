@@ -32,6 +32,17 @@ barChart
 const barLengthScale = d3
   .scaleLinear()
   .domain([0, 1000000])
-  .range(0, barChartHeight - marginLeft - 100);
+  .range([0, barChartWidth - marginLeft - 100]);
 
+const barHeight = 20;
+const barSpacing = 5;
 
+barChart
+  .selectAll("rect")
+  .data(topRockAlbums)
+  .join("rect")
+  .attr("width", (d) => barLengthScale(d.eq_albums))
+  .attr("height", barHeight)
+  .attr("x", marginLeft + 1)
+  .attr("y", (d, i) => barSpacing + (barHeight + barSpacing) * i)
+  .attr("fill", "#a6d854");
