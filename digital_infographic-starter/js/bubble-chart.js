@@ -84,5 +84,20 @@ const createBubbleChart = (data) => {
     .attr("cx", (d) => audioStreamsScale(d.on_demand_audio_streams_millions))
     .attr("cy", (d) => videoStreamScale(d.on_demand_video_streams_millions))
     .attr("r", (d) => bubblesAreaScale(d.album_sales_millions))
-    .attr('fill', d => colorScale(d.artist))
+    .attr("fill", (d) => colorScale(d.artist));
+
+  const list = d3.select(".legend-color").append("ul");
+
+  const listItems = list
+    .selectAll("li")
+    .data(data)
+    .join("li")
+    .attr("class", "bubble-color-legend-item");
+
+  listItems.append("span").attr("class", "legend-circle").style('background-color', d => colorScale(d.artist));
+
+  listItems
+    .append("span")
+    .attr("class", "legend-label")
+    .text((d) => d.title + ", " + d.artist);
 };
