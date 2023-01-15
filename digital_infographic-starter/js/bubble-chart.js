@@ -116,12 +116,33 @@ const createBubbleChart = (data) => {
     .attr("class", "circles-group")
     .attr("fill", "#727a87")
     .attr("fill-opacity", 0.4);
-  const linesGroup = salesLegend.append("g").attr("class", "lines-group");
+  const linesGroup = salesLegend
+    .append("g")
+    .attr("class", "lines-group")
+    .attr("stroke", "#333")
+    .attr("stroke-dasharray", "6 4");
   const lablesGroup = salesLegend.append("g").attr("class", "labels-group");
 
   circlesGroup.append("circle").attr("cx", 50).attr("cy", 32).attr("r", 27);
   circlesGroup.append("circle").attr("cx", 50).attr("cy", 44).attr("r", 15);
   circlesGroup.append("circle").attr("cx", 50).attr("cy", 50).attr("r", 6);
 
-  
+  linesGroup
+    .append("line")
+    .attr("x1", 50)
+    .attr("y1", 5)
+    .attr("x2", 100)
+    .attr("y2", 5);
+  linesGroup
+    .append("line")
+    .attr("x1", 50)
+    .attr("y1", 30)
+    .attr("x2", 100)
+    .attr("y2", 30);
+  linesGroup
+    .append("line")
+    .attr("x1", 50)
+    .attr("y1", 45)
+    .attr("x2", 100)
+    .attr("y2", 45);
 };
